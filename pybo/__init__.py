@@ -4,8 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flaskext.markdown import Markdown
 
-import config
-
 naming_convention = {
     "ix": 'ix_%(column_0_label)s',
     "uq": "uq_%(table_name)s_%(column_0_name)s",
@@ -18,7 +16,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(config) #config.py파일에 작성한 항목을 환경변수로 부르기 위해 코드작성
+    app.config.from_envvar('APP_CONFIG_FILE') #환경 변수 APP_CONFIG_FILE에 정의된 파일을 환경 파일로 사용하겠다.
 
     #ORM
     db.init_app(app)
