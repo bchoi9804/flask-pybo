@@ -4,7 +4,7 @@ from config.default import *
 
 SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(
     user='dbmasteruser',
-    pw='Cbm-04290829',
+    pw='bx%>q`2vqrH4XTo,>QaO#?:mXwToIoW.',
     url='ls-8b72fae5a481f475a66501e5ffc079873ff4b2cf.cszrrfo7ueks.ap-northeast-2.rds.amazonaws.com',
     db='flask_pybo')
 SQLALCHEMY_TRACK_MODIFICATIONS = False

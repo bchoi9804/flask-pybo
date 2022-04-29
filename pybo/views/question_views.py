@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, request, url_for, g, flash
 from werkzeug.utils import redirect
-from sqlalchemy import func
+from sqlalchemy import func, nullslast
 
 from .. import db
 from pybo.models import Question, Answer, User, question_voter
@@ -10,6 +10,13 @@ from pybo.views.auth_views import login_required
 from ..forms import QuestionForm, AnswerForm
 
 bp = Blueprint('question', __name__, url_prefix='/question')
+
+def _nullslast(obj):
+    if current_app.config['SQLALCHEMY_DATABASE_URI'].startswith("sqlite"):
+        return obj
+    else:
+        return nullslast(obj)
+
 
 
 @bp.route('/list/')
