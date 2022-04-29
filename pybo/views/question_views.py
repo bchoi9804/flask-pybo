@@ -17,8 +17,6 @@ def _nullslast(obj):
     else:
         return nullslast(obj)
 
-
-
 @bp.route('/list/')
 def _list():
     # 입력 파라미터
@@ -32,13 +30,13 @@ def _list():
             .group_by(question_voter.c.question_id).subquery()
         question_list = Question.query \
             .outerjoin(sub_query, Question.id == sub_query.c.question_id) \
-            .order_by(sub_query.c.num_voter.desc(), Question.create_date.desc())
+            .order_by(_nullslast(sub_query.c.num_voter.desc()), Question.create_date.desc())
     elif so == 'popular':
         sub_query = db.session.query(Answer.question_id, func.count('*').label('num_answer'))\
             .group_by(Answer.question_id).subquery()
         question_list = Question.query \
             .outerjoin(sub_query, Question.id == sub_query.c.question_id) \
-            .order_by(sub_query.c.num_answer.desc(), Question.create_date.desc())
+            .order_by(_nullslast(sub_query.c.num_answer.desc()), Question.create_date.desc())
     else:
         question_list = Question.query.order_by(Question.create_date.desc())
 
