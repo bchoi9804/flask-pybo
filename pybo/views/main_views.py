@@ -1,4 +1,4 @@
-from flask import Blueprint, url_for
+from flask import Blueprint, url_for, current_app
 from werkzeug.utils import redirect
 
 bp = Blueprint('main', __name__, url_prefix='/')
@@ -15,6 +15,7 @@ def hello_pybo():
 def index():
     #question_list = Question.query.order_by(Question.create_date.desc()) #질문 목록 데이터, 작성일시 기준으로 역순으로 정렬
     #return render_template('question/question_list.html', question_list=question_list) #템플릿파일
+    current_app.logger.info("INFO 레벨로 출력")
     return redirect(url_for('question._list'))
 
 #@bp.route('/detail/<int:question_id>/')
